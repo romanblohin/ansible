@@ -1,0 +1,19 @@
+---
+- name: Add group superusers, add user2 and user3
+  hosts: linux1
+  become: yes
+
+  tasks:
+    - name: Ensure group "superusers" exists
+      group:
+        name: superusers
+        state: present
+
+    - name: Add the user2 and user3 to the group superusers
+      user:
+        name: {{ item }}
+        group: superusers
+        state: present
+      with_items:
+        - user2
+        - user3

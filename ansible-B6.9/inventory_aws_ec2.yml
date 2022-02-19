@@ -1,0 +1,30 @@
+# # demo.aws_ec2.yml
+# plugin: aws_ec2
+# regions:
+#   - eu-north-1
+# keyed_groups:
+#   # add hosts to tag_Name_value groups for each aws_ec2 host's tags.Name variable
+#   - key: tags
+#     prefix: tag
+# groups:
+#   # add hosts to the group development if any of the dictionary's keys or values is the word 'devel'
+#   ubuntu_servers: "'Ubuntu' in (tags|list)"
+# compose:
+#   # set the ansible_host variable to connect with the private IP address without changing the hostname
+#   ansible_host: private_ip_address
+
+# Example using constructed features to create groups and set ansible_host
+
+    plugin: aws_ec2
+    regions:
+      - eu-north-1
+    # keyed_groups may be used to create custom groups
+    strict: False
+    keyed_groups:
+      - prefix: tag
+        key: tags
+    # Set individual variables with compose
+    compose:
+      # Use the private IP address to connect to the host
+      # (note: this does not modify inventory_hostname, which is set via I(hostnames))
+      ansible_host: public_ip_address
