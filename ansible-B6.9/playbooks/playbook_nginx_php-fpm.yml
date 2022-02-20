@@ -1,0 +1,8 @@
+---
+- name: Installing Nginx + PHP-fpm
+  hosts: tag_Name_Ubuntu_Server_1
+  gather_facts: no
+  become: yes
+
+  roles:
+    - nginx_php-fpm

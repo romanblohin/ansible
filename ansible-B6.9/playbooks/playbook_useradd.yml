@@ -1,6 +1,7 @@
 ---
 - name: Add group superusers, add user2 and user3
   hosts: tag_Name_Ubuntu_Server_1
+  gather_facts: no
   become: yes
 
   tasks:

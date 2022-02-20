@@ -1,0 +1,27 @@
+---
+# tasks file for nginx_php-fpm
+- name: Install nginx
+  apt: name=nginx state=latest update_cache=yes
+
+- name: Start Nginx
+  service: name=nginx state=started enabled=yes
+
+- name: Install PHP packages
+  apt: name="{{ item }}" state=latest update_cache=yes
+  loop: ["php7.4", "php7.4-fpm"]
+
+- name: Start PHP-FPM
+  service: name=php7.4-fpm state=started enabled=yes
+
+- name: Setting up nginx default site configuration
+  template: src=default.j2 dest=/etc/nginx/sites-enabled/default
+  notify: Restart Nginx
+
+- name: Create root_folder
+  file:
+    path: "{{ root_folder }}"
+    state: directory
+
+- name: Setting up main page
+  template: src=index.php.j2 dest={{ root_folder }}/index.php
+  notify: Restart Nginx
