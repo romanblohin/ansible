@@ -1,19 +1,27 @@
 ---
 - name: Add group superusers, add user2 and user3
-  hosts: linux1
+  hosts: tag_Name_Ubuntu_Server_1
   become: yes
 
   tasks:
-    - name: Ensure group "superusers" exists
+    - name: Create group "superusers"
       group:
         name: superusers
         state: present
 
-    - name: Add the user2 and user3 to the group superusers
+    - name: Add the user2 and user3 to the superusers group
       user:
-        name: {{ item }}
+        name: "{{ item }}"
         group: superusers
         state: present
       with_items:
         - user2
         - user3
+
+    - name: Validate the sudoers file before saving
+      lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: '^%superusers ALL='
+        line: '%superusers ALL=(ALL) NOPASSWD: ALL'
+        validate: /usr/sbin/visudo -cf %s

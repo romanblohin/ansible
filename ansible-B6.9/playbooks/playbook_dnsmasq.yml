@@ -1,6 +1,6 @@
 ---
 - name: Install dnsmasq
-  hosts: linux1
+  hosts: tag_Name_Ubuntu_Server_1
   gather_facts: no
   become: yes
 
