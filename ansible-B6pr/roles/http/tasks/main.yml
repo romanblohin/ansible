@@ -1,0 +1,15 @@
+---
+# tasks file for http
+- name: Install nginx
+  apt: name=nginx state=latest update_cache=yes
+
+- name: Start Nginx
+  service: name=nginx state=started enabled=yes
+
+- name: Setting up nginx site configuration
+  template: src=default.j2 dest=/etc/nginx/sites-enabled/default
+  notify: Restart Nginx
+
+- name: Setting up main page
+  template: src=index.php.j2 dest=/var/www/html/index.php
+  notify: Restart Nginx

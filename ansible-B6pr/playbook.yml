@@ -1,0 +1,19 @@
+---
+- name: Installing Nginx
+  hosts: linux1
+  gather_facts: no
+  become: yes
+  tags: nginx
+
+  roles:
+    - users
+    - http
+
+- name: Installing PHP-fpm
+  hosts: linux2
+  become: yes
+  tags: php-fpm
+
+  roles:
+    - users
+    - php

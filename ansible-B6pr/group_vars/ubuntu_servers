@@ -1,0 +1,3 @@
+---
+ansible_user : ubuntu
+php_fmp_ip: 10.2.0.25
