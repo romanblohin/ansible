@@ -1,0 +1,13 @@
+[database]
+vm1 ansible_host=178.154.200.220
+[app]
+vm2 ansible_host=62.84.118.231
+vm3 ansible_host=178.154.207.243
+[web]
+vm1 ansible_host=178.154.200.220
+[ubuntu_servers]
+vm1 ansible_host=178.154.200.220
+vm2 ansible_host=62.84.118.231
+[centos_servers]
+vm3 ansible_host=178.154.207.243
+

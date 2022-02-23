@@ -1,0 +1,21 @@
+---
+- name: Installing and configuring PostgreSQL
+  hosts: database
+  become: yes
+  gather_facts: no
+  tags: postgresql
+
+  roles:
+    - users
+    - postgresql
+
+
+- name: Installing Docker
+  hosts: app
+  become: yes
+  tags: docker
+
+  roles:
+    - users
+    - { role: docker_debian, when: ansible_os_family == 'Debian' }
+    - { role: docker_redhat, when: ansible_os_family == 'RedHat' }

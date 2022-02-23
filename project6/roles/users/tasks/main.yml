@@ -1,0 +1,12 @@
+---
+# tasks file for users
+- name: Create {{ username }}
+  user:
+    name: "{{ username }}"
+    state: present
+    
+- name: Set authorized key for {{ username }}
+  authorized_key:
+    user: "{{ username }}"
+    state: present
+    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"

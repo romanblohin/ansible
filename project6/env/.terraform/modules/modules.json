@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"subnet_1","Source":"./modules/module_network","Dir":"modules/module_network"},{"Key":"","Source":"","Dir":"."},{"Key":"instance_centos","Source":"./modules/module_instance","Dir":"modules/module_instance"},{"Key":"instance_ubuntu","Source":"./modules/module_instance","Dir":"modules/module_instance"}]}

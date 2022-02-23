@@ -1,0 +1,11 @@
+---
+# tasks file for postgresql
+- name: Install PostgreSQL
+  apt: name=postgresql state=latest update_cache=yes
+
+- name: Start PostgreSQL
+  service: name=postgresql state=started enabled=yes
+
+- name: Setting up PostgreSQL configuration
+  template: src=postgresql.conf.j2 dest=/etc/postgresql/{{ postgresql_version }}/main/postgresql.conf
+  notify: Restart PostgreSQL
